@@ -17,7 +17,6 @@ import retrofit2.Response;
  */
 
 public class ApiServiceIml {
-    String TAG = ApiService.class.getSimpleName();
 
     ApiService apiService;
 
@@ -37,7 +36,6 @@ public class ApiServiceIml {
 
             @Override
             public void onFailure(Call<ResponseBody> call, Throwable t) {
-                Log.e(TAG, t.toString());
                 dataCallback.onFetchFault(new Exception(t));
             }
         });

@@ -2,6 +2,7 @@ package com.admin.retrofitjsonplaceholder.presenter;
 
 import android.content.Context;
 import android.support.v7.widget.GridLayoutManager;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 
@@ -17,7 +18,6 @@ import java.util.ArrayList;
  */
 
 public class PhotoPresenter extends BasePresenter{
-    String TAG = PhotoPresenter.class.getSimpleName();
 
     private PhotoAdapter photoAdapter;
     ApiServiceIml apiServiceIml;
@@ -28,8 +28,9 @@ public class PhotoPresenter extends BasePresenter{
         super(context);
 
         apiServiceIml = new ApiServiceIml();
-        RecyclerView.LayoutManager layoutManager = new GridLayoutManager(context, 1);
-        recyclerView.setLayoutManager(layoutManager);
+        //RecyclerView.LayoutManager layoutManager = new GridLayoutManager(context, 1);
+        recyclerView.setLayoutManager(new LinearLayoutManager(context));
+
         photoArrayList = new ArrayList<>();
         photoAdapter = new PhotoAdapter(photoArrayList, context);
         recyclerView.setAdapter(photoAdapter);
@@ -39,7 +40,7 @@ public class PhotoPresenter extends BasePresenter{
         apiServiceIml.getAllPhotos(new FetchDataCallBack() {
             @Override
             public void onFetchSuccess(ArrayList<Photo> list) {
-                Log.d(TAG, list.toString());
+
                 photoArrayList.addAll(list);
                 photoAdapter.notifyDataSetChanged();
             }
